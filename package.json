@@ -23,24 +23,24 @@
    "dependencies": {
       "@flashflashrevolution/database-entities": "^0.3.1",
       "dotenv": "^8.2.0",
-      "form-urlencoded": "^4.1.4",
+      "form-urlencoded": "^4.2.1",
       "mysql-error-codes": "^0.1.2",
       "mysql2": "^2.1.0",
       "patreon-ts": "^0.3.2",
       "reflect-metadata": "^0.1.13",
-      "simple-oauth2": "3.4.0",
-      "typeorm": "0.2.22",
+      "simple-oauth2": "4.1.0",
+      "typeorm": "0.2.26",
       "typescript-string-operations": "^1.3.3"
    },
    "devDependencies": {
       "@types/form-urlencoded": "^2.0.1",
-      "@types/node": "^14.0.22",
-      "@types/simple-oauth2": "^2.5.3",
-      "@typescript-eslint/eslint-plugin": "^3.6.0",
-      "@typescript-eslint/parser": "^3.6.0",
-      "eslint": "^7.4.0",
-      "ts-node": "^8.10.2",
-      "typescript": "^3.9.6"
+      "@types/node": "^14.10.1",
+      "@types/simple-oauth2": "^4.1.0",
+      "@typescript-eslint/eslint-plugin": "^4.1.0",
+      "@typescript-eslint/parser": "^4.1.0",
+      "eslint": "^7.9.0",
+      "ts-node": "^9.0.0",
+      "typescript": "^4.0.2"
    },
    "files": [
       "dist/**"
