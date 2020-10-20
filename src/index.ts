@@ -1,8 +1,9 @@
 import { ImportEnvironmentVariables } from "./Config";
 ImportEnvironmentVariables();
 
-import mongoose from "mongoose"
-import { MonthlyReport } from "./MonthlyPatreonReport"
+import Process from "process";
+import mongoose from "mongoose";
+import { MonthlyReport } from "./MonthlyPatreonReport";
 
 const mongoUser: string = process.env.MONGO_USER as string;
 const mongoPass: string = process.env.MONGO_PASS as string;
@@ -18,8 +19,8 @@ async function Connect()
 
 async function BuildTestModel()
 {
-    const report = new MonthlyReport({ totalMonths: 8 })
-    await report.save()
+    const report = new MonthlyReport({ totalMonths: 8 });
+    await report.save();
     const user = await MonthlyReport.findOne();
     console.log(user);
 }
@@ -28,6 +29,7 @@ async function DoWork()
 {
     await Connect();
     await BuildTestModel();
+    Process.exit(0);
 }
 
 DoWork();
