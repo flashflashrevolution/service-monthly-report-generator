@@ -20,11 +20,11 @@
    },
    "homepage": "https://github.com/flashflashrevolution/patreon#readme",
    "dependencies": {
-      "@flashflashrevolution/database-entities": "^0.3.3",
+      "@flashflashrevolution/database-entities": "^0.4.0",
       "@typegoose/typegoose": "^7.4.1",
       "@types/simple-oauth2": "^4.1.0",
       "dotenv": "^8.2.0",
-      "mongoose": "^5.10.9",
+      "mongoose": "^5.10.10",
       "patreon-ts": "^0.4.0-0",
       "simple-oauth2": "^4.1.0"
    },
@@ -33,7 +33,7 @@
       "@types/node": "^14.14.2",
       "@typescript-eslint/eslint-plugin": "^4.5.0",
       "@typescript-eslint/parser": "^4.5.0",
-      "eslint": "^7.11.0",
+      "eslint": "^7.12.0",
       "ts-node": "^9.0.0",
       "typescript": "^4.0.3"
    },

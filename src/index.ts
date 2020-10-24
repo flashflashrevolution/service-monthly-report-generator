@@ -6,8 +6,8 @@ import mongoose from "mongoose";
 import { MonthlyReport } from "./MonthlyPatreonReport";
 import * as OAuth from 'simple-oauth2';
 import * as TypeORM from 'typeorm';
-import { CreatePatreonTokenFromOAuthToken } from "patreon-ts/dist/types";
-import { Entities } from "@flashflashrevolution/database-entities";
+//import { CreatePatreonTokenFromOAuthToken } from "patreon-ts/dist/types";
+import { Entities, Initialize } from "@flashflashrevolution/database-entities";
 
 const mongoConstants =
 {
@@ -70,7 +70,7 @@ const patreonOAuthCredentials: OAuth.ModuleOptions =
 };
 
 const client: OAuth.AuthorizationCode = new OAuth.AuthorizationCode(patreonOAuthCredentials);
-
+console.log(client);
 // Get the access token for the campaign. Set as the primary access token.
 // Set a timer for checking the validity of the token and refresh token.
 //  When necessary, refresh the access token and update the database.
@@ -103,6 +103,19 @@ async function ConnectToMongoDB()
     await mongoose.connect(connectionString, opts);
 }
 
+async function ConnectToSql()
+{
+    await Initialize(connectionOptions)
+        .then((connection: TypeORM.Connection) =>
+        {
+            console.log("Successfully connected to the database: " + connection.name);
+        })
+        .catch((reason: string) =>
+        {
+            console.error(reason);
+        });
+}
+
 async function BuildTestModel()
 {
     const report = new MonthlyReport({ totalMonths: 8 });
@@ -114,8 +127,11 @@ async function BuildTestModel()
 async function DoWork()
 {
     await ConnectToMongoDB();
+    await ConnectToSql();
     await BuildTestModel();
-    Process.exit(0);
 }
 
-DoWork();
+DoWork().finally(() =>
+{
+    Process.exit(0);
+});
