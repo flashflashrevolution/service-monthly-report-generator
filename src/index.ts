@@ -1,7 +1,6 @@
 import { ImportEnvironmentVariables } from "./Config";
 ImportEnvironmentVariables();
 
-import Process from "process";
 import mongoose from "mongoose";
 import { MonthlyReport } from "./MonthlyPatreonReport";
 import * as OAuth from 'simple-oauth2';
@@ -21,10 +20,10 @@ const mongoConstants =
 
 const sqlPatreonConstants =
 {
-    host: process.env.DB_HOST as string,
-    dbName: process.env.DB_PATREON as string,
-    dbUser: process.env.DB_PATREON_USER as string,
-    dbPass: process.env.DB_PATREON_PASS as string,
+    host: process.env.SQL_HOST as string,
+    dbName: process.env.SQL_PATREON_DB_NAME as string,
+    dbUser: process.env.SQL_PATREON_DB_USER as string,
+    dbPass: process.env.SQL_PATREON_DB_PASS as string,
 };
 
 const connectionOptions: TypeORM.ConnectionOptions =
@@ -92,13 +91,13 @@ async function ConnectToMongoDB()
     };
 
     const connectionString =
-        `mongodb+srv:\
-        //${mongoConstants.username}\
-        :${mongoConstants.password}\
-        @${mongoConstants.uri}\
-        /${mongoConstants.databaseName}\
-        ?retryWrites=${mongoConstants.retryWrites}\
-        &w=${mongoConstants.writes}`;
+        `mongodb+srv:` +
+        `//${mongoConstants.username}` +
+        `:${mongoConstants.password}` +
+        `@${mongoConstants.uri}` +
+        `/${mongoConstants.databaseName}` +
+        `?retryWrites=${mongoConstants.retryWrites}` +
+        `&w=${mongoConstants.writes}`;
 
     await mongoose.connect(connectionString, opts);
 }
@@ -133,5 +132,5 @@ async function DoWork()
 
 DoWork().finally(() =>
 {
-    Process.exit(0);
+    console.log("done")
 });
