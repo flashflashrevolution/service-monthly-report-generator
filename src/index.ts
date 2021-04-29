@@ -1,8 +1,6 @@
 import { ImportEnvironmentVariables } from "./Config";
 ImportEnvironmentVariables();
 
-import mongoose from "mongoose";
-import { MonthlyReport } from "./MonthlyPatreonReport";
 import * as OAuth from 'simple-oauth2';
 import * as TypeORM from 'typeorm';
 //import { CreatePatreonTokenFromOAuthToken } from "patreon-ts/dist/types";
@@ -77,31 +75,6 @@ console.log(client);
 //let accessToken: OAuth.AccessToken = client.createToken(JSON.parse(accessTokenJSONString));
 
 
-
-async function ConnectToMongoDB()
-{
-    const opts =
-    {
-        useNewUrlParser: true,
-        connectTimeoutMS: 1000,
-        poolSize: 10,
-        useFindAndModify: false,
-        useCreateIndex: true,
-        useUnifiedTopology: true
-    };
-
-    const connectionString =
-        `mongodb+srv:` +
-        `//${mongoConstants.username}` +
-        `:${mongoConstants.password}` +
-        `@${mongoConstants.uri}` +
-        `/${mongoConstants.databaseName}` +
-        `?retryWrites=${mongoConstants.retryWrites}` +
-        `&w=${mongoConstants.writes}`;
-
-    await mongoose.connect(connectionString, opts);
-}
-
 async function ConnectToSql()
 {
     await Initialize(connectionOptions)
@@ -117,7 +90,7 @@ async function ConnectToSql()
 
 async function BuildTestModel()
 {
-    const report = new MonthlyReport({ totalMonths: 8 });
+    const report = new MonthlyReport();
     await report.save();
     const user = await MonthlyReport.findOne();
     console.log(user);
@@ -125,7 +98,6 @@ async function BuildTestModel()
 
 async function DoWork()
 {
-    await ConnectToMongoDB();
     await ConnectToSql();
     await BuildTestModel();
 }

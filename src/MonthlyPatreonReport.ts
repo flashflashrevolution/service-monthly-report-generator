@@ -1,9 +1,5 @@
-import { getModelForClass, mongoose, prop } from '@typegoose/typegoose';
-
-class PatreonMonthlyReport
+class MonthlyReport
 {
-    @prop({ required: true })
-    public totalMonths!: mongoose.Types.Decimal128;
+    public totalMonths!: Number
 }
 
-export const MonthlyReport = getModelForClass(PatreonMonthlyReport);
